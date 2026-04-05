@@ -5,7 +5,7 @@ import { advocate } from "@/config/advocate";
 type Message = { role: "user" | "assistant"; content: string };
 
 export default function FloatingChat() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -17,10 +17,11 @@ export default function FloatingChat() {
     sessionIdRef.current = Math.random().toString(36).substring(2, 15);
   }, []);
 
-  // Pop up the bubble after 5 seconds
+  // Pop up the bubble and open the chat window after 5 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
+      setIsOpen(true);
     }, 5000);
     return () => clearTimeout(timer);
   }, []);
